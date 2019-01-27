@@ -36,15 +36,17 @@
         people: []
       };
     },
-    methods: {
-      addNewParticipant(participant) {
-        this.people.push(participant);
-      }
-    },
     mounted() {
       this.$http.get('participants').then(response => {
         this.people = response.body;
       });
+    },
+    methods: {
+      addNewParticipant(participant) {
+        this.$http.post('participants', participant).then(response => {
+          this.people.push(response.body);
+        });
+      }
     }
   };
 </script>
